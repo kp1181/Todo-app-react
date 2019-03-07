@@ -1,4 +1,3 @@
-
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -15,11 +14,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import Button from "@material-ui/core/Button";
 
 const drawerWidth = 240;
 
@@ -29,7 +24,7 @@ const styles = theme => ({
     flexGrow: 1
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
 
   appBar: {
@@ -103,7 +98,7 @@ class PersistentDrawerLeft extends React.Component {
     const { open } = this.state;
     const types = [];
     for (const key of Object.keys(this.props.todos)) {
-        types.push(key);
+      types.push(key);
     }
 
     return (
@@ -125,10 +120,14 @@ class PersistentDrawerLeft extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" color="inherit" noWrap className={classes.grow}>
+            <Typography
+              variant="h6"
+              color="inherit"
+              noWrap
+              className={classes.grow}
+            >
               ToDo app
             </Typography>
-            <Button color="inherit">About</Button>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -151,21 +150,21 @@ class PersistentDrawerLeft extends React.Component {
           </div>
           <Divider />
 
-          
-
           <List>
-            <ListItem button>
-                <ListItemText primary={"All Tasks"} />
-            </ListItem>
+            {/* <ListItem button>
+                <ListItemText primary={"All Tasks"} onClick = {this.props.handleType.bind(this,"all")}/>
+            </ListItem> */}
 
             {types.map((text, index) => (
-              <ListItem button key={index} onClick = {this.props.handleType.bind(this,text)}>
+              <ListItem
+                button
+                key={index}
+                onClick={this.props.handleType.bind(this, text)}
+              >
                 <ListItemText primary={text} />
               </ListItem>
             ))}
-            
           </List>
-
         </Drawer>
 
         <main
@@ -174,7 +173,7 @@ class PersistentDrawerLeft extends React.Component {
           })}
         >
           <div className={classes.drawerHeader} />
-            {this.props.children}
+          {this.props.children}
         </main>
       </div>
     );

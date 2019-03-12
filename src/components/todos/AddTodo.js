@@ -24,7 +24,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.common.white,
     border: "1px solid #ced4da",
     fontSize: 16,
-    padding: "15px 12px",
+    padding: "10px 12px",
     transition: theme.transitions.create(["border-color", "box-shadow"]),
     // Use the system font instead of the default Roboto font.
     fontFamily: [
@@ -62,6 +62,7 @@ const formDiv = {
   boxShadow: "0px 1px 3px 0px rgba(0,0,0,0.2)"
 };
 
+
 export class AddTodo extends React.Component {
   state = {
     title: ""
@@ -74,6 +75,8 @@ export class AddTodo extends React.Component {
   };
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
+
+
 
   render() {
     const { classes } = this.props;
@@ -100,8 +103,9 @@ export class AddTodo extends React.Component {
               aria-label="Add"
               className={classes.fab}
               type="submit"
+              style={{marginBottom:'12px'}}
             >
-              <ArrowUpwardIcon />
+              <ArrowUpwardIcon color={this.state.title==="" ? "disabled" : "primary"}/>
             </Fab>
           </form>
         </div>

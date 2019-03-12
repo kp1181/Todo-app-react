@@ -1,6 +1,6 @@
 import "date-fns";
 import React, { Component } from "react";
-import { Grid, Card, CardContent } from "@material-ui/core";
+import { Grid, Card, CardContent, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import DateFnsUtils from "@date-io/date-fns";
@@ -10,12 +10,16 @@ import {
   DatePicker
 } from "material-ui-pickers";
 import Button from "@material-ui/core/Button";
+import AlarmIcon from "@material-ui/icons/Alarm";
+import ShareIcon from "@material-ui/icons/Share";
+import NotesIcon from "@material-ui/icons/Notes"
 
 const styles = theme => ({
   card: {
-    minWidth: 20,
-    margin: "10px",
-    cursor: "pointer"
+    minWidth: 30,
+    margin:"5px",
+    cursor: "pointer",
+    height : "70px"
   },
   paper: {
     position: "absolute",
@@ -76,15 +80,19 @@ class TodoDetails extends Component {
     return (
       <React.Fragment>
         {clickedTodo ? (
-          <Card style={{ height: "400px", width: "400px", marginTop: "90px" }}>
+          <Card style={{ height: "400px", width: "400px", marginTop: "90px",padding:'20px' }}>
             <Grid container>
               <h1 style={{ marginLeft: "20px" }}>
                 {this.props.currentTodo.title}
               </h1>
               <Grid container>
                 <Grid  item xs onClick={this.handleOpen}>
-                  <Card className={classes.card}>
-                    <CardContent>Add Reminder</CardContent>
+                  <Card className={classes.card} style={{paddingBottom:'20px'}}>
+                    
+                    <CardContent>
+                      <AlarmIcon size="small" color="disabled"/>
+                      <Typography component="p" style={{fontSize:'12px',color:'#808080'}}>Add Reminder</Typography>  
+                    </CardContent>
                   </Card>
                 </Grid>
 
@@ -92,8 +100,7 @@ class TodoDetails extends Component {
                   aria-labelledby="simple-modal-title"
                   aria-describedby="simple-modal-description"
                   open={this.state.open}
-                  onClose={this.handleClose}
-                >
+                  onClose={this.handleClose}>
                   <div
                     className={classes.paper}
                     style={{
@@ -141,15 +148,22 @@ class TodoDetails extends Component {
 
                 <Grid item xs>
                   <Card className={classes.card}>
-                    <CardContent>Share Task</CardContent>
+                  <CardContent>
+                      <ShareIcon size="small" color="disabled"/>
+                      <Typography component="p" style={{fontSize:'12px',color:'#808080'}}>Share</Typography>  
+                    </CardContent>
                   </Card>
                 </Grid>
 
                 <Grid item xs>
                   <Card className={classes.card}>
-                    <CardContent>Personal</CardContent>
+                  <CardContent>
+                      <NotesIcon size="small" color="disabled"/>
+                      <Typography component="p" style={{fontSize:'12px',color:'#808080'}}>Personal</Typography>  
+                    </CardContent>
                   </Card>
                 </Grid>
+
               </Grid>
             </Grid>
           </Card>

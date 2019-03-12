@@ -15,6 +15,9 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import InputBase from '@material-ui/core/InputBase';
+
 
 const drawerWidth = 240;
 
@@ -25,6 +28,9 @@ const styles = theme => ({
   },
   grow: {
     flexGrow: 1
+  },
+  margin: {
+    margin: theme.spacing.unit,
   },
 
   appBar: {
@@ -58,7 +64,7 @@ const styles = theme => ({
   drawerHeader: {
     display: "flex",
     alignItems: "center",
-    padding: "0 8px",
+    padding: "0 px",
     ...theme.mixins.toolbar,
     justifyContent: "flex-end"
   },
@@ -82,8 +88,19 @@ const styles = theme => ({
 
 class PersistentDrawerLeft extends React.Component {
   state = {
-    open: false
+    open: false,
+    newTask : ""
   };
+
+  onSubmit = e => {
+    e.preventDefault();
+    console.log(this.state.newTask);
+    this.props.addNewTask(this.state.newTask);
+    this.setState({ newTask: "" });
+  };
+
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
+
 
   handleDrawerOpen = () => {
     this.setState({ open: true });
@@ -128,6 +145,7 @@ class PersistentDrawerLeft extends React.Component {
             >
               ToDo app
             </Typography>
+            
           </Toolbar>
         </AppBar>
         <Drawer
@@ -151,20 +169,51 @@ class PersistentDrawerLeft extends React.Component {
           <Divider />
 
           <List>
-            {/* <ListItem button>
-                <ListItemText primary={"All Tasks"} onClick = {this.props.handleType.bind(this,"all")}/>
-            </ListItem> */}
+
+          <ListItem style={{backgroundColor:'#F6F6F6'}}>
+                <CheckCircleOutlineIcon color="disabled"/>
+                <div style={{color:'#1762FF', fontWeight:'bold',paddingLeft:'11px'}}>MY LISTS</div>
+          </ListItem>
+
+          <ListItem
+                button
+                onClick={this.props.handleType.bind(this,"All Tasks")}
+                style={{paddingLeft:'50px',color:'#949494',marginTop:'12px'}}
+              >
+                All Tasks
+          </ListItem>
 
             {types.map((text, index) => (
               <ListItem
                 button
                 key={index}
                 onClick={this.props.handleType.bind(this, text)}
+                style={{paddingLeft:'50px',color:'#949494',marginTop:'8px'}}
               >
-                <ListItemText primary={text} />
+                {text}
               </ListItem>
             ))}
+
+                <form onSubmit={this.onSubmit}>
+                  <ListItem
+                    button
+                    type="submit"
+                    style={{paddingLeft:'42px',height:'43px',marginTop:'8px'}}
+                    onSubmit = {this.addNewTask}
+                  >
+                           <InputBase className={classes.margin} 
+                           name="newTask"
+                           placeholder="+ New Task"
+                           onChange={this.onChange}
+                           value= {this.state.newTask}
+                            />
+                </ListItem>
+                </form>
+
           </List>
+
+          
+
         </Drawer>
 
         <main

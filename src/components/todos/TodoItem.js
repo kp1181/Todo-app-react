@@ -20,6 +20,25 @@ const styles = theme => ({
   }
 });
 
+const listStyle = {
+  border: "1px solid #FFFFFF",
+  borderRadius: "4px",
+  margin: "5px",
+  boxShadow: "0px 1px 3px 0px rgba(0,0,0,0.2)",
+  cursor: "pointer"
+};
+
+const btnStyle = {
+  backgroundColor: "gray",
+  color: "white",
+  border: "none",
+  borderRadius: "50%",
+  cursor: "pointer",
+  width: 20,
+  height: 20
+};
+
+
 export class TodoItem extends Component {
   getStyle = () => {
     return {
@@ -59,6 +78,7 @@ export class TodoItem extends Component {
               color="default"
               onChange={this.props.markComplete.bind(this, id)}
               style={{ display: "inline-block", borderRadius: 50 }}
+              checked = {this.props.todo.completed ? true : false}
             />
           </Grid>
 
@@ -104,23 +124,6 @@ export class TodoItem extends Component {
 // PropTypes
 TodoItem.propTypes = {
   todo: PropTypes.object.isRequired
-};
-const listStyle = {
-  border: "1px solid #cccccc",
-  borderRadius: "8px",
-  margin: "5px",
-  boxShadow: "0px 1px 3px 0px rgba(0,0,0,0.2)",
-  cursor: "pointer"
-};
-
-const btnStyle = {
-  backgroundColor: "gray",
-  color: "white",
-  border: "none",
-  borderRadius: "50%",
-  cursor: "pointer",
-  width: 20,
-  height: 20
 };
 
 export default withStyles(styles)(TodoItem);

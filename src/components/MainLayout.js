@@ -7,6 +7,7 @@ import AddTodo from "./todos/AddTodo";
 import Todos from "./todos/Todos";
 import Card from "@material-ui/core/Card";
 import TodoDetails from "./detailedTodo/TodoDetails";
+import EmptyImage from "./EmptyImage";
 
 const styles = theme => ({
   root: {
@@ -224,7 +225,7 @@ class GuttersGrid extends React.Component {
       {
         todos: this.state.AllTodos[type].today.map(todo => {
           if (todo.id === id) {
-            todo.reminder = JSON.stringify(dateTime);
+            todo.reminder = dateTime.toString();
           }
           return todo;
         })
@@ -278,7 +279,7 @@ class GuttersGrid extends React.Component {
     const currentTodos = this.state.currentType;
     let listAll = currentTodos === "All Tasks" ? true : false;
     let clickedTodo;
-    if (this.state.currentTodo === undefined) {
+    if (typeof this.state.currentTodo === "undefined") {
       clickedTodo = true;
     } else {
       clickedTodo =
@@ -287,6 +288,8 @@ class GuttersGrid extends React.Component {
           ? false
           : true;
     }
+    console.log(clickedTodo)
+    console.log(this.state.currentTodo)
 
     return (
       <Navbar handleType={this.handleType} todos={this.state.AllTodos} addNewTask = {this.addNewTask}>
@@ -342,7 +345,10 @@ class GuttersGrid extends React.Component {
                 saveReminder={this.saveReminder}
               />
             ) : (
-              <p />
+              <React.Fragment>
+                {console.log("mannnn")}
+              <EmptyImage/>
+              </React.Fragment>
             )}
           </Grid>
         </Grid>

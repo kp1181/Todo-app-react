@@ -3,6 +3,7 @@ import TodoItem from "./TodoItem";
 
 class Todos extends Component {
   render() {
+    console.log(this.props.currentTodos)
     return this.props.currentTodos.map(todo => (
       <TodoItem
         key={todo.id}

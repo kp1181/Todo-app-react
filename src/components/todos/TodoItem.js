@@ -52,23 +52,15 @@ export class TodoItem extends Component {
     const { id, title, reminder, completed } = this.props.todo;
     const { classes } = this.props;
 
-    let date = reminder.substring(1, 11);
-    let time = reminder.substring(12, 17) + " UTC";
+    let reminderDate = new Date(reminder);
+    let hrs = reminderDate.getHours();
+    let mins = reminderDate.getMinutes();
+    let year = reminderDate.getFullYear().toString();
+    let month = reminderDate.getMonth() + 1;
+    let day = reminderDate.getDate();
 
-    // console.log("-----------------------")
-    // console.log(reminder)
-    // let reminderDate = new Date(reminder);
-    // console.log("checking date");
-    // console.log(reminderDate)
-    // let hrs = reminderDate.getHours();
-
-    //console.log(hrs.toString())
-
-    // let mins = reminderDate.getMinutes();
-    // let year = reminderDate.getFullYear().toString();
-    // let month = reminderDate.getMonth();
-    // let date = reminderDate.getDate();
-    //let date = reminderDate.getTime();
+    let date = day+ "-" + month + "-" + year 
+    let time = hrs + " : " + mins;
 
     return (
       <Paper style={listStyle} onClick={this.props.handleTodo.bind(this, id)}>
